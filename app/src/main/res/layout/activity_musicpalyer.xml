@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sample1.facesmash.facesmash.musicpalyer"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="1dp"
+        app:srcCompat="@drawable/mp" />
+
+    <SeekBar
+        android:id="@+id/positionBar"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/elapsedTimeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0:11"
+            android:layout_marginLeft="40dp"  />
+        <TextView
+            android:id="@+id/remainingTimeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-1:49"
+            android:layout_marginLeft="240dp"  />
+
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/playbtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/pause"
+        android:layout_marginTop="50dp"
+        android:onClick="playbtn"/>
+
+</LinearLayout>
