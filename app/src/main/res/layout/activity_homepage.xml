@@ -4,20 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     android:background="@drawable/bg"
 
     tools:context="com.sample1.facesmash.facesmash.HomepageActivity">
 
-// camera button
     <Button
         android:id="@+id/cam"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="490dp"
-        android:background="@drawable/button_custom"
-        android:onClick="cam" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_custom" />
 //menu button
     <Button
         android:id="@+id/menu"
@@ -41,15 +38,16 @@
     //image view for the image clicked by default camera
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="300dp"
-        android:layout_height="350dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="100dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="75dp" />
 
     //image view for toolbar XD
     <ImageView
         android:id="@+id/action_bar"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"

@@ -73,7 +73,6 @@ public class HomepageActivity extends AppCompatActivity {
     {
         startActivity(new Intent(this,Main2Activity.class));
     }
-
     public void gallery(View v)
     {
         startActivity(new Intent(this,HomeActivity.class));
