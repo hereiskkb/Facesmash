@@ -2,9 +2,9 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     //for responsive camera button
-    <item android:drawable="@drawable/cam_icon"
+    <item android:drawable="@drawable/cam2"
         android:state_pressed="true" />
-    <item android:drawable="@drawable/cam_icon"
+    <item android:drawable="@drawable/cam2"
         android:state_focused="true" />
     <item android:drawable="@drawable/cam" />
 </selector>

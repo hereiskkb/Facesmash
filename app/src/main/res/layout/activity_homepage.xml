@@ -7,21 +7,23 @@
     android:background="@drawable/bg"
 
     tools:context="com.sample1.facesmash.facesmash.HomepageActivity">
+//camera button
 
     <Button
         android:id="@+id/cam"
         android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_height="85dp"
+
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/button_custom" />
-//menu button
+    //menu button
     <Button
         android:id="@+id/menu"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
         android:background="@drawable/menu"
         android:onClick="menu" />
 
@@ -31,8 +33,7 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/gallery"
         android:onClick="gallery"
         />

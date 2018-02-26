@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
+    tools:context="com.sample1.facesmash.facesmash.gallery">
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+            android:id="@+id/happy1"
+            android:layout_width="177dp"
+            android:layout_height="175dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/happy1_original"
+            android:onClick="happy1" />
+
+            <Button
+                android:id="@+id/happy2"
+                android:layout_width="177dp"
+                android:layout_height="175dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/happy2_original"
+                android:onClick="happy2"/>
+
+            <Button
+                android:id="@+id/sad1"
+                android:layout_width="177dp"
+                android:layout_height="175dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="180dp"
+                android:background="@drawable/sad1_originl"
+                android:onClick="sad1" />
+
+            <Button
+                android:id="@+id/sad2"
+                android:layout_width="177dp"
+                android:layout_height="175dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="180dp"
+                android:background="@drawable/sad2_original"
+                android:onClick="sad2"/>
+
+            <Button
+                android:id="@+id/scared1"
+                android:layout_width="177dp"
+                android:layout_height="175dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="360dp"
+                android:background="@drawable/scared1_original"
+                android:onClick="scared1"/>
+
+            <Button
+                android:id="@+id/scared2"
+                android:layout_width="177dp"
+                android:layout_height="175dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="360dp"
+                android:background="@drawable/scared2_original"
+                android:onClick="scared2"/>
+
+            <Button
+                android:id="@+id/angry1"
+                android:layout_width="177dp"
+                android:layout_height="175dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="540dp"
+                android:background="@drawable/angry1_original"
+                android:onClick="angry1" />
+
+            <Button
+                android:id="@+id/angry2"
+                android:layout_width="177dp"
+                android:layout_height="175dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="540dp"
+                android:background="@drawable/angry2_original"
+                android:onClick="angry2"/>
+
+            <Button
+                android:id="@+id/neutral1"
+                android:layout_width="177dp"
+                android:layout_height="175dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="720dp"
+                android:background="@drawable/neutral1_original"
+                android:onClick="neutral1" />
+            <Button
+                android:id="@+id/neutral2"
+                android:layout_width="177dp"
+                android:layout_height="175dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="720dp"
+                android:background="@drawable/nn"
+                android:onClick="neutral2" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
+
+
+

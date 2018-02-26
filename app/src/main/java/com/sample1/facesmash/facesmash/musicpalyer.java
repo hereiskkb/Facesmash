@@ -58,22 +58,26 @@ public class musicpalyer extends AppCompatActivity {
 
      //sad
         else if(k==2) {
+         Toast.makeText(this,"sad",Toast.LENGTH_LONG).show();
             mp = MediaPlayer.create(this, R.raw.b);
             mp.start();        }
      //angry
      else if(k==3) {
+         Toast.makeText(this,"angry",Toast.LENGTH_LONG).show();
          mp = MediaPlayer.create(this, R.raw.c);
          mp.start();
      }
 
      //fear
      else if(k==4) {
+         Toast.makeText(this,"scared",Toast.LENGTH_LONG).show();
          mp = MediaPlayer.create(this, R.raw.d);
          mp.start();
      }
 
      //neutral
      else if(k==5) {
+         Toast.makeText(this,"neutral",Toast.LENGTH_LONG).show();
          mp = MediaPlayer.create(this, R.raw.e);
          mp.start();
      }
