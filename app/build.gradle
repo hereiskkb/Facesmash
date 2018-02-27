@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.sample1.facesmash.facesmash"
         minSdkVersion 18
-        targetSdkVersion 27
+        targetSdkVersion 23//changed
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -29,6 +29,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:27.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.microsoft.projectoxford:face:1.1.0'
 
     testCompile 'junit:junit:4.12'
 

@@ -13,10 +13,10 @@
         android:id="@+id/cam"
         android:layout_width="100dp"
         android:layout_height="85dp"
-
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/button_custom" />
+        android:background="@drawable/button_custom"
+        android:onClick="cam"/>
     //menu button
     <Button
         android:id="@+id/menu"
@@ -25,7 +25,8 @@
         android:layout_alignParentLeft="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/menu"
-        android:onClick="menu" />
+        android:onClick="menu"
+        android:layout_marginLeft="20dp"/>
 
     //gallery button
     <Button
@@ -36,6 +37,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/gallery"
         android:onClick="gallery"
+        android:layout_marginRight="20dp"
         />
 
     //image view for the image clicked by default camera

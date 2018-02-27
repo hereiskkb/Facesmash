@@ -3,7 +3,10 @@ package com.sample1.facesmash.facesmash;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.CountDownTimer;
+import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,123 +14,62 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 
 public class HomepageActivity extends AppCompatActivity {
     private boolean bb;
     ImageView imageView;
-    int k;
-    int tag;
+    private static final int REQUEST_TAKE_PHOTO = 1888;
+    private static final int REQUEST_SELECT_IMAGE = 1;
+
+    // The URI of photo taken with camera
+    private Uri mUriPhotoTaken;
+
+    // The URI of gallery image
+    private Uri mImageUri;
+
+    private Bitmap mBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
-        Button cam =(Button) findViewById(R.id.cam);
-        imageView = (ImageView)findViewById(R.id.imageView);
-
-
-
-
-        //camera button c
-
-        cam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //opens default camera
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,0);
-            }
-        });
-
-
+        imageView = findViewById(R.id.imageView);
     }
 
 
     @Override
-    protected void onActivityResult(int requestCode, final int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //displays image captured on home page
-        if (requestCode == 0) {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            imageView.setImageBitmap(bitmap);
-            //faking to process XD ..with a delay of 3s
-            Toast.makeText(this, "processing.....", Toast.LENGTH_LONG).show();
-            final Thread hThread = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        sleep(3000);
-                        int k = 1;
-                        Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
-                        intent.putExtra("key", k);
-                        startActivity(intent);
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_SELECT_IMAGE:
+                if (resultCode == RESULT_OK) {
+                    mImageUri = data.getData();
+                   mBitmap = ImageHelper.loadSizeLimitedBitmapFromUri(mImageUri, getContentResolver());
+                    if (mBitmap != null) {
+                        imageView.setImageBitmap(mBitmap);
                     }
                 }
-            };
-            hThread.start();
-        } else if (requestCode == 1) {
+                break;
 
-            if (resultCode == 1) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.happy1));
-                k = 1;
-            } else if (resultCode == 2) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.happy2));
-                k = 1;
-            }else if (resultCode == 3) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.sad1));
-                k = 2;
-            }else if (resultCode == 4) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.sad2));
-                k = 2;
-            }
-            else if (resultCode == 5) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.scared1));
-                k = 4;
-            }else if (resultCode == 6) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.scared2));
-                k = 4;
-            }else if (resultCode == 7) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.angry1));
-                k = 3;
-            }else if (resultCode == 8) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.angry2));
-                k = 3;
-            }else if (resultCode == 9) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.neutral1));
-                k = 5;
-            }else if (resultCode == 2) {
-                imageView.setImageDrawable(getResources().getDrawable(R.drawable.neutral2));
-                k = 5;
-            }
-            //faking to process XD ..with a delay of 3s
-            Toast.makeText(this, "processing.....", Toast.LENGTH_LONG).show();
-            final Thread hThread = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        sleep(3000);
-
-                        Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
-                        intent.putExtra("key", k);
-                        startActivity(intent);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+            case REQUEST_TAKE_PHOTO:
+                if (resultCode == RESULT_OK) {
+                    mBitmap = ImageHelper.loadSizeLimitedBitmapFromUri(mUriPhotoTaken, getContentResolver());
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    mBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    imageView.setImageBitmap(mBitmap);
                 }
-            };
-            hThread.start();
+                break;
 
 
+            default:
+                break;
         }
     }
-
-
-
 
     public void menu(View v)
     {
@@ -136,11 +78,24 @@ public class HomepageActivity extends AppCompatActivity {
 
     public void gallery(View v)
     {
-        Intent intent = new Intent(HomepageActivity.this,gallery.class);
-        startActivityForResult(intent,1);
-
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, REQUEST_SELECT_IMAGE);
     }
 
+    public void cam(View v)
+    {
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        try {
+            File file = File.createTempFile("IMG_", ".jpg", storageDir);
+            mUriPhotoTaken = Uri.fromFile(file);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, mUriPhotoTaken);
+            startActivityForResult(intent, REQUEST_TAKE_PHOTO);
+        } catch (IOException e) {
+            //setInfo(e.getMessage());
+        }
+    }
 
     @Override
     //pressing back button twice to exit
@@ -156,7 +111,6 @@ public class HomepageActivity extends AppCompatActivity {
         new CountDownTimer(3000,1000){
             @Override
             public void onTick(long millisUntilFinished) {
-
             }
 
             @Override
