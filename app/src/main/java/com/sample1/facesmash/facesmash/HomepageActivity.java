@@ -11,9 +11,16 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Gallery;
@@ -35,7 +42,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 public class HomepageActivity extends AppCompatActivity {
+
+
     private boolean bb;
     ImageView image;
     private static final int REQUEST_TAKE_PHOTO = 1888;
@@ -51,6 +62,12 @@ public class HomepageActivity extends AppCompatActivity {
 
     ProgressDialog mProgressDialog;
 
+    Toolbar toolbar;
+    ActionBarDrawerToggle actionBarDrawerToggle;
+    NavigationView navigationView;
+    DrawerLayout drawerLayout;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +76,42 @@ public class HomepageActivity extends AppCompatActivity {
         image = findViewById(R.id.image1234);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setTitle("Please Wait");
+        navigationView = (NavigationView) findViewById(R.id.navigation_menu);
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        drawerLayout.closeDrawers();
+                        break;
+                    case R.id.gallery:
+                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        intent.setType("image/*");
+                        startActivityForResult(intent, REQUEST_SELECT_IMAGE);
+                        break;
+
+
+                }
+                return  false;
+            }
+        });
+        setUpToolbar();
+
     }
+
+    private void setUpToolbar()
+    {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.app_name,R.string.app_name);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+    }
+
+
 
     private class DetectionTask extends AsyncTask<InputStream, String, Face[]> {
         private boolean mSucceed = true;
@@ -91,9 +143,11 @@ public class HomepageActivity extends AppCompatActivity {
         protected void onPostExecute(Face[] result) {
             setUiAfterDetection(result, mSucceed);
         }
+
     }
 
     @Override
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_SELECT_IMAGE:
@@ -128,14 +182,23 @@ public class HomepageActivity extends AppCompatActivity {
         }
     }
 
-    public void menu(View v) {
-        startActivity(new Intent(this, Main2Activity.class));
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.gallery,menu);
+        return true;
     }
 
-    public void gallery(View v) {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, REQUEST_SELECT_IMAGE);
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id =item.getItemId();
+        if(id==R.id.gallery)
+        {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+            startActivityForResult(intent, REQUEST_SELECT_IMAGE);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void cam(View v) {
@@ -215,6 +278,10 @@ public class HomepageActivity extends AppCompatActivity {
         if (emotion.anger > emotionValue) {
             emotionValue = emotion.anger;
             emotionType = "Anger";
+            int k=3;
+            Intent intent = new Intent(HomepageActivity.this,musicpalyer.class);
+            intent.putExtra("key",k);
+            startActivity(intent);
         }
         if (emotion.contempt > emotionValue) {
             emotionValue = emotion.contempt;
@@ -227,18 +294,35 @@ public class HomepageActivity extends AppCompatActivity {
         if (emotion.fear > emotionValue) {
             emotionValue = emotion.fear;
             emotionType = "Fear";
+            int k=4;
+            Intent intent = new Intent(HomepageActivity.this,musicpalyer.class);
+            intent.putExtra("key",k);
+            startActivity(intent);
         }
-        if (emotion.happiness > emotionValue) {
+        if (emotion.happiness > emotionValue)
+        {
             emotionValue = emotion.happiness;
             emotionType = "Happiness";
+            int k=1;
+            Intent intent = new Intent(HomepageActivity.this,musicpalyer.class);
+            intent.putExtra("key",k);
+            startActivity(intent);
         }
         if (emotion.neutral > emotionValue) {
             emotionValue = emotion.neutral;
             emotionType = "Neutral";
+            int k=5;
+            Intent intent = new Intent(HomepageActivity.this,musicpalyer.class);
+            intent.putExtra("key",k);
+            startActivity(intent);
         }
         if (emotion.sadness > emotionValue) {
             emotionValue = emotion.sadness;
             emotionType = "Sadness";
+            int k=2;
+            Intent intent = new Intent(HomepageActivity.this,musicpalyer.class);
+            intent.putExtra("key",k);
+            startActivity(intent);
         }
         if (emotion.surprise > emotionValue) {
             emotionValue = emotion.surprise;
@@ -246,4 +330,6 @@ public class HomepageActivity extends AppCompatActivity {
         }
         return emotionType;
     }
+
+
 }

@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try
                 {
-                    sleep(4000);
+                    sleep(2000);
                     Intent intent = new Intent(MainActivity.this,HomepageActivity.class);
                     startActivity(intent);
                     finish();
