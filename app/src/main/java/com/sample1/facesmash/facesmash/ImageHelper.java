@@ -143,44 +143,6 @@ public class ImageHelper {
         return bitmap;
     }
 
-    // Highlight the selected face thumbnail in face list.
-    public static Bitmap highlightSelectedFaceThumbnail(Bitmap originalBitmap) {
-        Bitmap bitmap = originalBitmap.copy(Bitmap.Config.ARGB_8888, true);
-        Canvas canvas = new Canvas(bitmap);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.parseColor("#3399FF"));
-        int stokeWidth = Math.max(originalBitmap.getWidth(), originalBitmap.getHeight()) / 10;
-        if (stokeWidth == 0) {
-            stokeWidth = 1;
-        }
-        bitmap.getWidth();
-        paint.setStrokeWidth(stokeWidth);
-        canvas.drawRect(
-                0,
-                0,
-                bitmap.getWidth(),
-                bitmap.getHeight(),
-                paint);
-
-        return bitmap;
-    }
-
-    // Crop the face thumbnail out from the original image.
-    // For better view for human, face rectangles are resized to the rate faceRectEnlargeRatio.
-    public static Bitmap generateFaceThumbnail(
-            Bitmap originalBitmap,
-            FaceRectangle faceRectangle) throws IOException {
-        FaceRectangle faceRect =
-                calculateFaceRectangle(originalBitmap, faceRectangle, FACE_RECT_SCALE_RATIO);
-
-        return Bitmap.createBitmap(
-                originalBitmap, faceRect.left, faceRect.top, faceRect.width, faceRect.height);
-    }
-
-    // Return the number of times for the image to shrink when loading it into memory.
-    // The SampleSize can only be a final value based on powers of 2.
     private static int calculateSampleSize(int maxSideLength, int expectedMaxImageSideLength) {
         int inSampleSize = 1;
 

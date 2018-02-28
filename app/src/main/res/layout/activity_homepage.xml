@@ -43,7 +43,7 @@
     //image view for the image clicked by default camera
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/image1234"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
