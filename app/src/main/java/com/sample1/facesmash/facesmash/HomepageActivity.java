@@ -1,9 +1,14 @@
 package com.sample1.facesmash.facesmash;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
@@ -40,6 +45,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -68,11 +74,30 @@ public class HomepageActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
 
 
+    public boolean isConnected(Context context) {
+
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netinfo = cm.getActiveNetworkInfo();
+
+        if(netinfo != null && netinfo.isConnectedOrConnecting()) {
+            android.net.NetworkInfo wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            android.net.NetworkInfo mobile = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+            if((mobile != null && mobile.isConnectedOrConnecting()) || (wifi != null && wifi.isConnectedOrConnecting())) return true;
+        else return false;
+        }
+
+        else
+        return false;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+        if(!isConnected(HomepageActivity.this))
+            Toast.makeText(HomepageActivity.this,"No Internet Connection!!!", Toast.LENGTH_SHORT).show();
         image = findViewById(R.id.image1234);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setTitle("Please Wait");
@@ -245,91 +270,114 @@ public class HomepageActivity extends AppCompatActivity {
 
     private void setUiAfterDetection(Face[] result, boolean succeed) {
         mProgressDialog.dismiss();
-        String detectionResult = "Emotion(s) Detected:";
-        if (succeed) {
-            if (result != null) {
-                List<Face> faces;
+        if(!isConnected(HomepageActivity.this))
+            Toast.makeText(HomepageActivity.this,"No Internet Connection!!!", Toast.LENGTH_SHORT).show();
+        else {
+            String detectionResult = "Emotion(s) Detected:";
+            if (succeed) {
+                if (result != null) {
+                    List<Face> faces;
 
-                faces = Arrays.asList(result);
-                if (faces.isEmpty())
-                    detectionResult = "No Faces Detected";
-                else {
-                    for (Face face : faces) {
-                        detectionResult += getEmotion(face.faceAttributes.emotion) + ", ";//adds a comma after every emotion
+                    faces = Arrays.asList(result);
+                    if (faces.isEmpty())
+                        detectionResult = "No Faces Detected";
+                    else {
+                        for (Face face : faces) {
+                            detectionResult += getEmotion(face.faceAttributes.emotion) + ", ";//adds a comma after every emotion
+                        }
+                        detectionResult = detectionResult.substring(0, detectionResult.length() - 2) + ".";//removes last comma and adds a fullstop
+                        image.setImageBitmap(ImageHelper.drawFaceRectanglesOnBitmap(
+                                mBitmap, result, false));
                     }
-                    detectionResult = detectionResult.substring(0, detectionResult.length() - 2) + ".";//removes last comma and adds a fullstop
-                    image.setImageBitmap(ImageHelper.drawFaceRectanglesOnBitmap(
-                            mBitmap, result, false));
                 }
             }
-        } else {
-            detectionResult = "No Faces Detected";
-        }
-        //here we redirect to music player activity with the emotion stored in detection result
-        Toast.makeText(HomepageActivity.this, detectionResult, Toast.LENGTH_LONG).show();
+            //here we redirect to music player activity with the emotion stored in detection result
+            Toast.makeText(HomepageActivity.this, detectionResult, Toast.LENGTH_LONG).show();
 
-        mImageUri = null;
-        mBitmap = null;
+            mImageUri = null;
+            mBitmap = null;
+        }
     }
 
-    private String getEmotion(Emotion emotion) {
+    private String getEmotion(Emotion emotion)
+
+    {
+        List<Double> list = new ArrayList<>();
         String emotionType = "";
-        double emotionValue = 0.0;
-        if (emotion.anger > emotionValue) {
-            emotionValue = emotion.anger;
+        list.add(emotion.anger);
+        list.add(emotion.happiness);
+        list.add(emotion.contempt);
+        list.add(emotion.disgust);
+        list.add(emotion.fear);
+        list.add(emotion.neutral);
+        list.add(emotion.sadness);
+        list.add(emotion.surprise);
+
+        Collections.sort(list);
+
+        double maxNum = list.get(list.size() - 1);
+        if (maxNum == emotion.anger) {
             emotionType = "Anger";
-            int k=3;
-            Intent intent = new Intent(HomepageActivity.this,musicpalyer.class);
-            intent.putExtra("key",k);
+            int k = 3;
+            Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
+            intent.putExtra("key", k);
+            startActivity(intent);
+        } else if (maxNum == emotion.happiness) {
+            emotionType = "Happiness";
+            int k = 1;
+            Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
+            intent.putExtra("key", k);
             startActivity(intent);
         }
-        if (emotion.contempt > emotionValue) {
-            emotionValue = emotion.contempt;
+        else if (maxNum == emotion.contempt)
+        {
+
             emotionType = "Contempt";
-        }
-        if (emotion.disgust > emotionValue) {
-            emotionValue = emotion.disgust;
+
+        } else if (maxNum == emotion.disgust)
+
+        {
             emotionType = "Disgust";
+
         }
-        if (emotion.fear > emotionValue) {
-            emotionValue = emotion.fear;
+        else if (maxNum == emotion.fear)
+        {
             emotionType = "Fear";
             int k=4;
             Intent intent = new Intent(HomepageActivity.this,musicpalyer.class);
             intent.putExtra("key",k);
             startActivity(intent);
+
         }
-        if (emotion.happiness > emotionValue)
+        else if (maxNum == emotion.neutral)
         {
-            emotionValue = emotion.happiness;
-            emotionType = "Happiness";
-            int k=1;
-            Intent intent = new Intent(HomepageActivity.this,musicpalyer.class);
-            intent.putExtra("key",k);
-            startActivity(intent);
-        }
-        if (emotion.neutral > emotionValue) {
-            emotionValue = emotion.neutral;
             emotionType = "Neutral";
-            int k=5;
-            Intent intent = new Intent(HomepageActivity.this,musicpalyer.class);
-            intent.putExtra("key",k);
+            int k = 5;
+            Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
+            intent.putExtra("key", k);
             startActivity(intent);
         }
-        if (emotion.sadness > emotionValue) {
-            emotionValue = emotion.sadness;
+        else if (maxNum == emotion.sadness)
+        {
             emotionType = "Sadness";
-            int k=2;
-            Intent intent = new Intent(HomepageActivity.this,musicpalyer.class);
-            intent.putExtra("key",k);
+            int k = 2;
+            Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
+            intent.putExtra("key", k);
             startActivity(intent);
         }
-        if (emotion.surprise > emotionValue) {
-            emotionValue = emotion.surprise;
+        else if (maxNum == emotion.surprise)
+        {
             emotionType = "Surprise";
         }
-        return emotionType;
+        else
+            {
+            emotionType = "Neutral";
+            int k = 5;
+            Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
+            intent.putExtra("key", k);
+            startActivity(intent);
+        }
+
+       return emotionType;
     }
-
-
 }

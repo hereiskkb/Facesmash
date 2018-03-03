@@ -42,7 +42,7 @@ public class musicpalyer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //on receiving the value of k from home activty plays music accordingly
+        //on receiving the value of k from home activity plays music accordingly
         setContentView(R.layout.activity_musicpalyer);
         k=getIntent().getExtras().getInt("key");
         playbtn = (Button)findViewById(R.id.playbtn);
