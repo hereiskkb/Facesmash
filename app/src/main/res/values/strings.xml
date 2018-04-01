@@ -5,7 +5,8 @@
     <string name="large_text">
     </string>
     <string name="action_settings">Settings</string>
-    <string name="subscription_key">1786b6a13e1a483cbf80e601fe19205a</string>
+    <string name="subscription_key">12ef3a1ff9fc431694d50900a15e7d47</string>
     <string name="endpoint">https://westcentralus.api.cognitive.microsoft.com/face/v1.0</string>
+    <string name="title_activity_home">Home</string>
 
 </resources>

@@ -7,6 +7,12 @@
             android:id="@+id/home"
             android:icon="@drawable/home">
         </item>
+
+        <item
+            android:title="CROWD MANAGEMENT"
+            android:id="@+id/crm"
+            android:icon="@drawable/people">
+        </item>
         <item
             android:title="GALLERY"
             android:id="@+id/gallery"

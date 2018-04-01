@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+
+        tools:context="com.sample1.facesmash.facesmash.Home"
+        android:background="@drawable/bg"
+        android:weightSum="1"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+
+    <LinearLayout
+    android:weightSum="5"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="40dp">
+
+    <ToggleButton android:background="@drawable/music_select"
+        android:layout_height="100dp"
+        android:layout_width="350dp"
+        android:id="@+id/music_player"
+        android:layout_weight="0.5"
+        android:text=""
+        android:textOff=""
+        android:textOn=""
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:onClick="music"/>
+
+    <View android:layout_height="5dp"
+        android:layout_width="0dp"
+        android:layout_weight="01"/>
+
+    <ToggleButton
+        android:background="@drawable/crowd_select"
+        android:layout_height="100dp"
+        android:layout_width="350dp"
+        android:id="@+id/crowd_man"
+        android:layout_weight="0.5"
+        android:text=""
+        android:textOff=""
+        android:textOn=""
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:layout_marginTop="30dp"
+        android:onClick="crowd"/>
+
+    <View
+        android:layout_height="5dp"
+        android:layout_width="0dp"
+        android:layout_weight="01"/>
+
+    <ToggleButton
+        android:background="@drawable/set_select"
+        android:layout_height="100dp"
+        android:layout_width="350dp"
+        android:id="@+id/security"
+        android:layout_weight="0.5"
+        android:text=""
+        android:textOff=""
+        android:textOn=""
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:layout_marginTop="30dp"
+        android:onClick="security"/>
+
+</LinearLayout>
+
+</LinearLayout>

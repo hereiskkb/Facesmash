@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -23,6 +24,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +32,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.microsoft.projectoxford.face.FaceServiceClient;
@@ -55,6 +59,8 @@ public class HomepageActivity extends AppCompatActivity {
 
     private boolean bb;
     ImageView image;
+
+
     private static final int REQUEST_TAKE_PHOTO = 1888;
     private static final int REQUEST_SELECT_IMAGE = 1;
 
@@ -65,6 +71,11 @@ public class HomepageActivity extends AppCompatActivity {
     private Uri mImageUri;
 
     private Bitmap mBitmap;
+    int k;
+    float l = 0;
+    int option=1;
+    float anger,happy,sad,fear,neutral;
+    float age=0;
 
     ProgressDialog mProgressDialog;
 
@@ -102,21 +113,31 @@ public class HomepageActivity extends AppCompatActivity {
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setTitle("Please Wait");
         navigationView = (NavigationView) findViewById(R.id.navigation_menu);
+        final RelativeLayout layout = (RelativeLayout) findViewById(R.id.relativelayout1);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
+                        layout.setBackground(getResources().getDrawable(R.drawable.bg));
+                        image.setImageBitmap(null);
                         drawerLayout.closeDrawers();
+                        option=1;
                         break;
                     case R.id.gallery:
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                         intent.setType("image/*");
                         startActivityForResult(intent, REQUEST_SELECT_IMAGE);
+                        drawerLayout.closeDrawers();
                         break;
-
-
+                    case R.id.crm:
+                        layout.setBackgroundColor(Color.WHITE);
+                        image.setImageBitmap(null);
+                        drawerLayout.closeDrawers();
+                        Toast.makeText(HomepageActivity.this,"crowd management", Toast.LENGTH_SHORT).show();
+                        option=2;
+                        break;
                 }
                 return  false;
             }
@@ -147,8 +168,10 @@ public class HomepageActivity extends AppCompatActivity {
             FaceServiceClient faceServiceClient = new FaceServiceRestClient(getString(R.string.endpoint), getString(R.string.subscription_key));
             try {
                 // Start detection.
-                return faceServiceClient.detect(params[0], true, true,
+                return faceServiceClient.detect(params[0],true, true,
                         new FaceServiceClient.FaceAttributeType[]{
+                                FaceServiceClient.FaceAttributeType.Age,
+                                FaceServiceClient.FaceAttributeType.Gender,
                                 FaceServiceClient.FaceAttributeType.Emotion,
                         });
             } catch (Exception e) {
@@ -269,35 +292,108 @@ public class HomepageActivity extends AppCompatActivity {
     }
 
     private void setUiAfterDetection(Face[] result, boolean succeed) {
+        String Age1="";
+        String Gender1="";
+        float male=0,female=0;
+        float n,a=0,n1=0,n2=0,n3=0;
+
+
         mProgressDialog.dismiss();
         if(!isConnected(HomepageActivity.this))
             Toast.makeText(HomepageActivity.this,"No Internet Connection!!!", Toast.LENGTH_SHORT).show();
         else {
-            String detectionResult = "Emotion(s) Detected:";
-            if (succeed) {
-                if (result != null) {
-                    List<Face> faces;
+                String detectionResult = "Emotion(s) Detected:";
+                int detectionResult1;
 
-                    faces = Arrays.asList(result);
-                    if (faces.isEmpty())
-                        detectionResult = "No Faces Detected";
-                    else {
-                        for (Face face : faces) {
-                            detectionResult += getEmotion(face.faceAttributes.emotion) + ", ";//adds a comma after every emotion
+                if (succeed) {
+                    if (result != null) {
+                        List<Face> faces;
+
+                        faces = Arrays.asList(result);
+                        if (faces.isEmpty())
+                            detectionResult = "No Faces Detected";
+                        else {
+                            happy=0;sad=0;fear=0;anger=0;neutral=0;
+                            detectionResult1 = result.length;
+                            for (Face face : faces) {
+                                Age1 = String.format("%s",face.faceAttributes.age);
+                                age = Float.valueOf(Age1);
+                                if( age >= 10 && age <= 20 )
+                                    n1++;
+                                else if(age > 20 && age <=40 )
+                                    n2++;
+                                else if(age > 40 )
+                                    n3++;
+                                Gender1 = String.format("%s",face.faceAttributes.gender);
+                                detectionResult += getEmotion(face.faceAttributes.emotion) + ", ";//adds a comma after every emotion
+                                if(Gender1.equals("male"))
+                                {
+                                    male++;
+                                }
+                                else if(Gender1.equals("female"))
+                                {
+                                    female++;
+                                }
+
+
+                            }
+
+                            detectionResult = detectionResult.substring(0, detectionResult.length() - 2) + ".";//removes last comma and adds a fullstop
+                            image.setImageBitmap(ImageHelper.drawFaceRectanglesOnBitmap(
+                                    mBitmap, result, false));
+
+
+                            //here we redirect to music player activity with the emotion stored in detection result
+                            if(option==1)
+                            {
+                                Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
+                                intent.putExtra("key", k);
+
+                                startActivity(intent);
+                            }
+                            else if(option==2)
+
+                            {
+                                n1 = n1 / result.length * 100;
+                                n2 = n2 / result.length * 100;
+                                n3 = n3 / result.length * 100;
+                                male = male / result.length * 100;
+                                female = female / result.length * 100;
+
+                                happy = happy / result.length * 100;
+                                sad = sad / result.length * 100;
+                                neutral = neutral / result.length * 100;
+                                anger = anger / result.length * 100;
+                                fear = fear / result.length * 100;
+                                Intent intent = new Intent(HomepageActivity.this, crowd.class);
+                                intent.putExtra("detectionResult",detectionResult1);
+                                intent.putExtra("anger",anger);
+                                intent.putExtra("happy",happy);
+                                intent.putExtra("sad", sad);
+                                intent.putExtra("fear",fear);
+                                intent.putExtra("neutral",neutral);
+                                intent.putExtra("male",male);
+                                intent.putExtra("female",female);
+                                intent.putExtra("age", age);
+                                intent.putExtra("n1", n1);
+                                intent.putExtra("n2", n2);
+                                intent.putExtra("n3", n3);
+                                startActivity(intent);
+                            }
                         }
-                        detectionResult = detectionResult.substring(0, detectionResult.length() - 2) + ".";//removes last comma and adds a fullstop
-                        image.setImageBitmap(ImageHelper.drawFaceRectanglesOnBitmap(
-                                mBitmap, result, false));
+                        Toast.makeText(HomepageActivity.this, detectionResult, Toast.LENGTH_LONG).show();
+
                     }
                 }
-            }
-            //here we redirect to music player activity with the emotion stored in detection result
-            Toast.makeText(HomepageActivity.this, detectionResult, Toast.LENGTH_LONG).show();
 
-            mImageUri = null;
-            mBitmap = null;
+
+
+                mImageUri = null;
+                mBitmap = null;
+            }
+
         }
-    }
+
 
     private String getEmotion(Emotion emotion)
 
@@ -314,69 +410,45 @@ public class HomepageActivity extends AppCompatActivity {
         list.add(emotion.surprise);
 
         Collections.sort(list);
-
         double maxNum = list.get(list.size() - 1);
+
+
         if (maxNum == emotion.anger) {
-            emotionType = "Anger";
-            int k = 3;
-            Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
-            intent.putExtra("key", k);
-            startActivity(intent);
-        } else if (maxNum == emotion.happiness) {
-            emotionType = "Happiness";
-            int k = 1;
-            Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
-            intent.putExtra("key", k);
-            startActivity(intent);
-        }
-        else if (maxNum == emotion.contempt)
-        {
+                emotionType = "Anger";
+                k = 3;
 
-            emotionType = "Contempt";
+                ++anger;
+            } else if (maxNum == emotion.happiness) {
+                emotionType = "Happiness";
+                k = 1;
 
-        } else if (maxNum == emotion.disgust)
+                ++happy;
+            } else if (maxNum == emotion.contempt) {
 
-        {
-            emotionType = "Disgust";
+                emotionType = "Contempt";
 
-        }
-        else if (maxNum == emotion.fear)
-        {
-            emotionType = "Fear";
-            int k=4;
-            Intent intent = new Intent(HomepageActivity.this,musicpalyer.class);
-            intent.putExtra("key",k);
-            startActivity(intent);
+            } else if (maxNum == emotion.disgust)
 
-        }
-        else if (maxNum == emotion.neutral)
-        {
-            emotionType = "Neutral";
-            int k = 5;
-            Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
-            intent.putExtra("key", k);
-            startActivity(intent);
-        }
-        else if (maxNum == emotion.sadness)
-        {
-            emotionType = "Sadness";
-            int k = 2;
-            Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
-            intent.putExtra("key", k);
-            startActivity(intent);
-        }
-        else if (maxNum == emotion.surprise)
-        {
-            emotionType = "Surprise";
-        }
-        else
             {
-            emotionType = "Neutral";
-            int k = 5;
-            Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
-            intent.putExtra("key", k);
-            startActivity(intent);
-        }
+                emotionType = "Disgust";
+
+            } else if (maxNum == emotion.fear) {
+                emotionType = "Fear";
+                k = 4;
+                ++fear;
+
+
+            } else if (maxNum == emotion.neutral) {
+                emotionType = "Neutral";
+                 k = 5;
+                 ++neutral;
+            } else if (maxNum == emotion.sadness) {
+                emotionType = "Sadness";
+                k = 2;
+                ++sad;
+            } else if (maxNum == emotion.surprise) {
+                emotionType = "Surprise";
+            }
 
        return emotionType;
     }

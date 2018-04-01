@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/bg"
+android:orientation="vertical"
+android:weightSum="1"
+tools:context="com.sample1.facesmash.facesmash.crowd">
+
+
+
+<ImageView
+    android:layout_width="400dp"
+    android:layout_height="220dp"
+    android:layout_alignParentTop="true"
+    android:layout_centerInParent="true"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/ca" />
+
+    <TextView
+        android:id="@+id/faces"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="58dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="#ffffff"
+
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/emotions"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="85dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="#ffffff"
+
+        android:textSize="16sp" />
+<TextView
+    android:layout_width="50dp"
+    android:layout_height="30dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="85dp"
+    android:layout_marginTop="170dp"
+    android:fontFamily="@font/montserrat_bold"
+    android:textColor="#ffffff"
+
+    android:id="@+id/male"
+    android:textSize="16sp" />
+<TextView
+    android:layout_width="50dp"
+    android:layout_height="30dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="299dp"
+    android:layout_marginTop="170dp"
+    android:id="@+id/female"
+    android:fontFamily="@font/montserrat_bold"
+    android:textColor="#ffffff"
+
+    android:textSize="16sp" />
+
+<ImageView
+    android:layout_width="400dp"
+    android:layout_height="220dp"
+    android:layout_alignParentTop="true"
+    android:layout_centerInParent="true"
+    android:layout_marginTop="245dp"
+    android:src="@drawable/age" />
+<TextView
+    android:layout_width="50dp"
+    android:layout_height="30dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="190dp"
+    android:layout_marginTop="365dp"
+    android:id="@+id/n2"
+    android:fontFamily="@font/montserrat_bold"
+    android:textColor="#ffffff"
+
+    android:textSize="16sp" />
+<TextView
+    android:layout_width="50dp"
+    android:layout_height="30dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginLeft="55dp"
+    android:layout_marginTop="365dp"
+    android:id="@+id/n1"
+    android:fontFamily="@font/montserrat_bold"
+    android:textColor="#ffffff"
+
+    android:textSize="16sp" />
+<TextView
+    android:layout_width="50dp"
+    android:layout_height="30dp"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:layout_marginRight="35dp"
+    android:layout_marginTop="365dp"
+    android:id="@+id/n3"
+    android:fontFamily="@font/montserrat_bold"
+    android:textColor="#ffffff"
+
+    android:textSize="16sp" />
+
+
+<ImageView
+    android:layout_width="400dp"
+    android:layout_height="220dp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerInParent="true"
+    android:layout_marginBottom="0dp"
+    android:src="@drawable/emm" />
+
+<TextView
+    android:layout_width="50dp"
+    android:layout_height="30dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginLeft="230dp"
+    android:layout_marginBottom="35dp"
+    android:id="@+id/neutral"
+    android:fontFamily="@font/montserrat_bold"
+    android:textColor="#ffffff"
+
+    android:textSize="16sp"/>
+<TextView
+    android:layout_width="50dp"
+    android:layout_height="30dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginLeft="230dp"
+    android:layout_marginBottom="65dp"
+    android:id="@+id/fear"
+    android:fontFamily="@font/montserrat_bold"
+    android:textColor="#ffffff"
+
+    android:textSize="16sp" />
+<TextView
+    android:layout_width="50dp"
+    android:layout_height="30dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginLeft="230dp"
+    android:layout_marginBottom="95dp"
+    android:id="@+id/angry"
+    android:fontFamily="@font/montserrat_bold"
+    android:textColor="#ffffff"
+
+    android:textSize="16sp" />
+<TextView
+    android:layout_width="50dp"
+    android:layout_height="30dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginLeft="230dp"
+    android:layout_marginBottom="125dp"
+    android:id="@+id/sad"
+    android:fontFamily="@font/montserrat_bold"
+    android:textColor="#ffffff"
+
+    android:textSize="16sp" />
+<TextView
+    android:layout_width="50dp"
+    android:layout_height="30dp"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginLeft="230dp"
+    android:layout_marginBottom="155dp"
+    android:id="@+id/happy"
+    android:fontFamily="@font/montserrat_bold"
+    android:textColor="#ffffff"
+
+    android:textSize="16sp" />
+
+</RelativeLayout>
