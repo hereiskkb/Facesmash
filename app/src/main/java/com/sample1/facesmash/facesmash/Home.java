@@ -24,6 +24,7 @@ public class Home extends AppCompatActivity {
         choice=1;
         Intent intent = new Intent(Home.this, HomepageActivity.class);
         intent.putExtra("choice",choice);
+        startActivity(intent);
     }
 
 
@@ -31,6 +32,7 @@ public class Home extends AppCompatActivity {
         choice=2;
         Intent intent = new Intent(Home.this, HomepageActivity.class);
         intent.putExtra("choice",choice);
+        startActivity(intent);
     }
 
     public void security(View view)
@@ -38,5 +40,6 @@ public class Home extends AppCompatActivity {
         choice=1;
         Intent intent = new Intent(Home.this,HomepageActivity.class);
         intent.putExtra("choice",choice);
+        startActivity(intent);
     }
 }
