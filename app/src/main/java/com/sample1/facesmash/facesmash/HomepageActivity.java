@@ -35,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.microsoft.projectoxford.face.FaceServiceClient;
@@ -57,7 +58,7 @@ import static android.app.Activity.RESULT_OK;
 public class HomepageActivity extends AppCompatActivity {
 
 
-    private boolean bb;
+
     ImageView image;
 
 
@@ -73,7 +74,7 @@ public class HomepageActivity extends AppCompatActivity {
     private Bitmap mBitmap;
     int k;
     float l = 0;
-    int option=1;
+    int option;
     float anger,happy,sad,fear,neutral;
     float age=0;
 
@@ -107,37 +108,72 @@ public class HomepageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+        option=getIntent().getExtras().getInt("choice");
+
         if(!isConnected(HomepageActivity.this))
             Toast.makeText(HomepageActivity.this,"No Internet Connection!!!", Toast.LENGTH_SHORT).show();
         image = findViewById(R.id.image1234);
+        if(option==1)
+        {
+            String msg ="Music Player";
+            TextView action = (TextView) findViewById(R.id.textbar);
+            action.setText(msg);
+            image.setImageResource(R.drawable.mmark);
+        }
+        else if(option==2)
+        {
+            String msg ="Crowd Management";
+            TextView action = (TextView) findViewById(R.id.textbar);
+            action.setText(msg);
+            image.setImageResource(R.drawable.cmark);
+        }
+        else if(option==3)
+        {
+            String msg ="Security";
+            TextView action = (TextView) findViewById(R.id.textbar);
+            action.setText(msg);
+            image.setImageResource(R.drawable.smark);
+        }
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setTitle("Please Wait");
-        navigationView = (NavigationView) findViewById(R.id.navigation_menu);
-        final RelativeLayout layout = (RelativeLayout) findViewById(R.id.relativelayout1);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+
+            navigationView = (NavigationView) findViewById(R.id.navigation_menu);
+
+
+
+            final RelativeLayout layout = (RelativeLayout) findViewById(R.id.relativelayout1);
+
+                navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
+
                     case R.id.home:
-                        layout.setBackground(getResources().getDrawable(R.drawable.bg));
-                        image.setImageBitmap(null);
-                        drawerLayout.closeDrawers();
-                        option=1;
+                        finish();
                         break;
+
                     case R.id.gallery:
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                         intent.setType("image/*");
                         startActivityForResult(intent, REQUEST_SELECT_IMAGE);
                         drawerLayout.closeDrawers();
                         break;
-                    case R.id.crm:
-                        layout.setBackgroundColor(Color.WHITE);
-                        image.setImageBitmap(null);
-                        drawerLayout.closeDrawers();
-                        Toast.makeText(HomepageActivity.this,"crowd management", Toast.LENGTH_SHORT).show();
-                        option=2;
+                    case R.id.tutorial:
+                        Intent i = new Intent(HomepageActivity.this, under_construction.class);
+                        startActivity(i);
                         break;
+                    case R.id.settings:
+                        Intent sett = new Intent(HomepageActivity.this, under_construction.class);
+                        startActivity(sett);
+                        break;
+
+                    case R.id.about:
+                        Intent a = new Intent(HomepageActivity.this, under_construction.class);
+                        startActivity(a);
+                        break;
+
                 }
                 return  false;
             }
@@ -262,40 +298,13 @@ public class HomepageActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    //pressing back button twice to exit
-    public void onBackPressed() {
-        if (!bb) {
-            Toast.makeText(this, "press back again to exit", Toast.LENGTH_LONG).show();
-            //not saving pictures and deleting whole folder
-            File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-            if (dir.isDirectory()) {
-                String[] children = dir.list();
-                for (int i = 0; i < children.length; i++) {
-                    new File(dir, children[i]).delete();
-                }
-            }
-            bb = true;
-        } else {
-            super.onBackPressed();
-        }
-        new CountDownTimer(3000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-            }
 
-            @Override
-            public void onFinish() {
-                bb = false;
-            }
-        }.start();
-    }
 
     private void setUiAfterDetection(Face[] result, boolean succeed) {
         String Age1="";
         String Gender1="";
         float male=0,female=0;
-        float n,a=0,n1=0,n2=0,n3=0;
+        float n1=0,n2=0,n3=0;
 
 
         mProgressDialog.dismiss();
@@ -348,7 +357,7 @@ public class HomepageActivity extends AppCompatActivity {
                             {
                                 Intent intent = new Intent(HomepageActivity.this, musicpalyer.class);
                                 intent.putExtra("key", k);
-
+                                Toast.makeText(HomepageActivity.this, detectionResult, Toast.LENGTH_LONG).show();
                                 startActivity(intent);
                             }
                             else if(option==2)
@@ -379,9 +388,15 @@ public class HomepageActivity extends AppCompatActivity {
                                 intent.putExtra("n2", n2);
                                 intent.putExtra("n3", n3);
                                 startActivity(intent);
+                                Toast.makeText(HomepageActivity.this, detectionResult, Toast.LENGTH_LONG).show();
+                            }
+                            else if(option==3)
+                            {
+                                Toast.makeText(HomepageActivity.this,"face identified,no threat", Toast.LENGTH_LONG).show();
                             }
                         }
-                        Toast.makeText(HomepageActivity.this, detectionResult, Toast.LENGTH_LONG).show();
+
+
 
                     }
                 }
