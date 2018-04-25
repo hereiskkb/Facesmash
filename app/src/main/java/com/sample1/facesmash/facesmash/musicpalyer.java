@@ -1,9 +1,7 @@
 package com.sample1.facesmash.facesmash;
 
-import android.app.FragmentManager;
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class musicpalyer extends AppCompatActivity {
     Button playbtn;
@@ -22,8 +23,10 @@ public class musicpalyer extends AppCompatActivity {
     TextView remainingTimeLabel;
     MediaPlayer mp;
     int totalTime;
-
+    private int mCurrentSongIndex = 0;
+    private int mTotalSongs = 0;
     int k;
+    private ArrayList<HashMap<String, String>> mSongList;
 
     public void stop()
     {
@@ -44,41 +47,62 @@ public class musicpalyer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //on receiving the value of k from home activity plays music accordingly
         setContentView(R.layout.activity_musicpalyer);
-        k=getIntent().getExtras().getInt("key");
+        k=getIntent().getExtras().getInt("key", 1);
         playbtn = (Button)findViewById(R.id.playbtn);
         elapsedTimeLabel=(TextView)findViewById(R.id.elapsedTimeLabel);
         remainingTimeLabel=(TextView)findViewById(R.id.remainingTimeLabel);
+        mp = new MediaPlayer();
+        createPlaylist(k);
+        mCurrentSongIndex = 0;
+            mp.reset();
+            try {
+                mp.setDataSource(mSongList.get(mCurrentSongIndex).get("songPath"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                mp.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            mp.start();
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    if(mCurrentSongIndex < mSongList.size() - 1) {
+                        mCurrentSongIndex++;
+                        mp.reset();
+                        try {
+                            mp.setDataSource(mSongList.get(mCurrentSongIndex).get("songPath"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            mp.prepare();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        mp.start();
+                    }
+                    else if( mCurrentSongIndex == (mSongList.size() -1)) {
+                        mCurrentSongIndex = 0;
+                        mp.reset();
+                        try {
+                            mp.setDataSource(mSongList.get(mCurrentSongIndex).get("songPath"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            mp.prepare();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        mp.start();
+                    }
+                }
+            });
 
-        //happy
-     if(k==1)
-     {
-         mp = MediaPlayer.create(this, R.raw.a);
-         mp.start();
-     }
-
-     //sad
-        else if(k==2) {
-            mp = MediaPlayer.create(this, R.raw.b);
-            mp.start();        }
-     //angry
-     else if(k==3) {
-         mp = MediaPlayer.create(this, R.raw.c);
-         mp.start();
-     }
-
-     //fear
-     else if(k==4) {
-         mp = MediaPlayer.create(this, R.raw.d);
-         mp.start();
-     }
-
-     //neutral
-     else if(k==5) {
-         mp = MediaPlayer.create(this, R.raw.e);
-         mp.start();
-     }
-
-//to manage seek bar according music time duration
+    //to manage seek bar according music time duration
     mp.seekTo(0);
     totalTime = mp.getDuration();
     positionBar=(SeekBar)findViewById(R.id.positionBar);
@@ -119,6 +143,44 @@ public class musicpalyer extends AppCompatActivity {
     }).start();
     }
 
+    private void createPlaylist(int moodValue) {
+        mSongList = new ArrayList<HashMap<String, String>>();
+        File home = null;
+        //happy
+        if(k==1)
+        {
+            home = new File("/sdcard/songs/happy/");
+        }
+
+        //sad
+        else if(k==2) {
+            home = new File("/sdcard/songs/sad/");
+        }
+        //angry
+        else if(k==3) {
+            home = new File("/sdcard/songs/angry/");
+        }
+
+        //fear
+        else if(k==4) {
+            home = new File("/sdcard/songs/fear/");
+        }
+        //neutral
+        else if(k==5) {
+            home = new File("/sdcard/songs/neutral/");
+        }
+        mTotalSongs = home.listFiles().length;
+        if(mTotalSongs > 0) {
+            for( File file : home.listFiles()) {
+                HashMap<String, String> song = new HashMap<String, String>();
+                song.put("songTitle", file.getName().substring(0, (file.getName().length() - 4)));
+                song.put("songPath", file.getPath());
+                mSongList.add(song);
+            }
+        }
+    }
+
+    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
