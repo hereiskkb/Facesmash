@@ -19,56 +19,54 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:paddingTop="40dp">
 
-        <Button
-
-            android:id="@+id/music_player"
-            android:layout_width="wrap_content"
-            android:layout_height="105dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/music_select"
-            android:onClick="music"
-            android:text=""
-            android:textOff=""
-            android:textOn="" />
+    <ToggleButton android:background="@drawable/music_select"
+        android:layout_height="100dp"
+        android:layout_width="350dp"
+        android:id="@+id/music_player"
+        android:layout_weight="0.5"
+        android:text=""
+        android:textOff=""
+        android:textOn=""
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:onClick="music"/>
 
     <View android:layout_height="5dp"
         android:layout_width="0dp"
         android:layout_weight="01"/>
 
-        <ToggleButton
-            android:id="@+id/crowd_man"
-            android:layout_width="wrap_content"
-            android:layout_height="105dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_marginTop="30dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/crowd_select"
-            android:onClick="crowd"
-            android:text=""
-            android:textOff=""
-            android:textOn="" />
+    <ToggleButton
+        android:background="@drawable/crowd_select"
+        android:layout_height="100dp"
+        android:layout_width="350dp"
+        android:id="@+id/crowd_man"
+        android:layout_weight="0.5"
+        android:text=""
+        android:textOff=""
+        android:textOn=""
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:layout_marginTop="30dp"
+        android:onClick="crowd"/>
 
     <View
         android:layout_height="5dp"
         android:layout_width="0dp"
         android:layout_weight="01"/>
 
-        <ToggleButton
-            android:id="@+id/security"
-            android:layout_width="wrap_content"
-            android:layout_height="105dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_marginTop="30dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/set_select"
-            android:onClick="security"
-            android:text=""
-            android:textOff=""
-            android:textOn="" />
+    <ToggleButton
+        android:background="@drawable/set_select"
+        android:layout_height="100dp"
+        android:layout_width="350dp"
+        android:id="@+id/security"
+        android:layout_weight="0.5"
+        android:text=""
+        android:textOff=""
+        android:textOn=""
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:layout_marginTop="30dp"
+        android:onClick="security"/>
 
 </LinearLayout>
 

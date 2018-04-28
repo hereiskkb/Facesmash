@@ -10,8 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/relativelayout1"
-        android:background="@drawable/bg">
+        android:background="#fff">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -26,7 +25,7 @@
             android:layout_height="85dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/button_custom"
+            android:background="@drawable/cam_icon"
             android:onClick="cam"/>
 
         <ImageView

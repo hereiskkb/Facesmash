@@ -32,7 +32,7 @@
         <activity
             android:name=".HomepageActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".crowd"
             android:screenOrientation="portrait" />
@@ -44,9 +44,7 @@
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".under_construction"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -8,14 +8,27 @@
             android:icon="@drawable/home">
         </item>
 
-
+        <item
+            android:title="CROWD MANAGEMENT"
+            android:id="@+id/crm"
+            android:icon="@drawable/people">
+        </item>
         <item
             android:title="GALLERY"
             android:id="@+id/gallery"
             android:icon="@drawable/gallery">
 
         </item>
+        <item
+            android:title="PLAYLIST"
+            android:id="@+id/playlist"
+            android:icon="@drawable/ic_playlist_play_black_24dp"> </item>
+        <item
+            android:title="MUSIC LIBRARY"
+            android:id="@+id/music"
+            android:icon="@drawable/ic_library_music">
 
+        </item>
     <item
         android:title="TUTORIAL"
         android:id="@+id/tutorial"

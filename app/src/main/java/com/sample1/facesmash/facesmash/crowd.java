@@ -47,13 +47,14 @@ public class crowd extends AppCompatActivity {
         else if (max==neutral)
             emo="NEUTRAL";
 
-        String msg1 =""+no_faces;
-        TextView people = (TextView) findViewById(R.id.faces);
-        people.setText(msg1);
 
         String message = ""+ emo;
         TextView emotion = (TextView) findViewById(R.id.emotions);
         emotion.setText(message);
+
+        String msg1 =""+no_faces;
+        TextView people = (TextView) findViewById(R.id.faces);
+        people.setText(msg1);
 
         String msg2 = ""+happy+"%";
         TextView h = (TextView) findViewById(R.id.happy);
