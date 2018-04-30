@@ -140,19 +140,54 @@ public class crowd extends AppCompatActivity {
                             pmale.setSecondaryProgress(100);
                         }
                     });
-                    try {
-                        // Just to display the progress slowly
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    if(male<3)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+
+                    else if(male>3&&male<10) {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    else if (male>10 && male<20)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     smale++;
                 }
-                smale=0;
+                smale = 0;
             }
 
         }).start();
-        smale = 0;
 
         new Thread(new Runnable() {
 
@@ -171,15 +206,51 @@ public class crowd extends AppCompatActivity {
 
                         }
                     });
-                    try {
-                        // Just to display the progress slowly
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    if(female<3)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+
+                    else if(female>3&&female<10) {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    else if (female>10 && female<20)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     sfemale++;
                 }
-                sfemale=0;
+                sfemale = 0;
             }
         }).start();
 
@@ -200,16 +271,51 @@ public class crowd extends AppCompatActivity {
 
                         }
                     });
-                    try {
+                    if(n1<3)
+                    {
+                        try {
 
-                        // Just to display the progress slowly
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                            // Just to display the progress slowly
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+
+                   else if(n1>3&&n1<10) {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    else if (n1>10 && n1<20)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     sage10++;
                 }
-                sage10=0;
+                sage10 = 0;
             }
         }).start();
         new Thread(new Runnable() {
@@ -229,13 +335,49 @@ public class crowd extends AppCompatActivity {
 
                         }
                     });
-                    try {
+                    if(n2<3)
+                    {
+                        try {
 
-                        // Just to display the progress slowly
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                            // Just to display the progress slowly
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
+
+
+
+                    else if(n2>3&&n2<10) {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    else if (n2>10 && n2<20)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     sage20++;
                 }
                 sage20=0;
@@ -259,13 +401,49 @@ public class crowd extends AppCompatActivity {
 
                         }
                     });
-                    try {
+                    if(n3<3)
+                    {
+                        try {
 
-                        // Just to display the progress slowly
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                            // Just to display the progress slowly
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
+
+
+
+                    else if(n3>3&&n3<10) {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    else if (n3>10 && n3<20)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     sage40++;
                 }
                 sage40=0;
@@ -288,11 +466,47 @@ public class crowd extends AppCompatActivity {
                             thappy.setText(shappy + "%");
                         }
                     });
-                    try {
-                        // Just to display the progress slowly
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    if(happy<3)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+
+                    else if(happy>3&&happy<10) {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    else if (happy>10 && happy<20)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     shappy += 1;
                 }
@@ -317,11 +531,47 @@ public class crowd extends AppCompatActivity {
                             tsad.setText(ssad + "%");
                         }
                     });
-                    try {
-                        // Just to display the progress slowly
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    if(n1<3)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+
+                    else if(sad>3&&sad<10) {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    else if (sad>10 && sad<20)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     ssad += 1;
                 }
@@ -347,12 +597,47 @@ public class crowd extends AppCompatActivity {
                             tangry.setText(sangry + "%");
                         }
                     });
-                    try {
+                    if(anger<3)
+                    {
+                        try {
 
-                        // Just to display the progress slowly
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                            // Just to display the progress slowly
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+
+                    else if(anger>3&&anger<10) {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    else if (anger>10 && anger<20)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     sangry += 1;
                 }
@@ -377,11 +662,47 @@ public class crowd extends AppCompatActivity {
                             tfear.setText(sfear + "%");
                         }
                     });
-                    try {
-                        // Just to display the progress slowly
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    if(fear<3)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+
+                    else if(fear>3&&fear<10) {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    else if (fear>10 && fear<20)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     sfear += 1;
                 }
@@ -406,12 +727,47 @@ public class crowd extends AppCompatActivity {
                             tneutral.setText(sneutral + "%");
                         }
                     });
-                    try {
+                    if(neutral<3)
+                    {
+                        try {
 
-                        // Just to display the progress slowly
-                        Thread.sleep(20);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                            // Just to display the progress slowly
+                            Thread.sleep(200);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+
+                    else if(neutral>3&&neutral<10) {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    else if (neutral>10 && neutral<20)
+                    {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(50);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+
+                            // Just to display the progress slowly
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                     sneutral += 1;
                 }
