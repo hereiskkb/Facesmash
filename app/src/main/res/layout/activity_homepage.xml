@@ -40,6 +40,16 @@
             android:layout_marginBottom="120dp"
             android:layout_centerHorizontal="true" />
 
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:layout_below="@+id/image1234"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-118dp"
+            android:background="#00bcd4"
+            android:text="Results" />
+
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView
