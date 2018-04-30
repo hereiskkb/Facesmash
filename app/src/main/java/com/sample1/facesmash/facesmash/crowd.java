@@ -140,7 +140,7 @@ public class crowd extends AppCompatActivity {
                             pmale.setSecondaryProgress(100);
                         }
                     });
-                    if(male<3)
+                    if(male<=3)
                     {
                         try {
 
@@ -153,7 +153,7 @@ public class crowd extends AppCompatActivity {
 
 
 
-                    else if(male>3&&male<10) {
+                    else if(male>3&&male<=10) {
                         try {
 
                             // Just to display the progress slowly
@@ -163,7 +163,7 @@ public class crowd extends AppCompatActivity {
                         }
                     }
 
-                    else if (male>10 && male<20)
+                    else if (male>10 && male<=20)
                     {
                         try {
 
@@ -206,7 +206,7 @@ public class crowd extends AppCompatActivity {
 
                         }
                     });
-                    if(female<3)
+                    if(female<=3)
                     {
                         try {
 
@@ -219,7 +219,7 @@ public class crowd extends AppCompatActivity {
 
 
 
-                    else if(female>3&&female<10) {
+                    else if(female>3&&female<=10) {
                         try {
 
                             // Just to display the progress slowly
@@ -229,7 +229,7 @@ public class crowd extends AppCompatActivity {
                         }
                     }
 
-                    else if (female>10 && female<20)
+                    else if (female>10 && female<=20)
                     {
                         try {
 
@@ -271,7 +271,7 @@ public class crowd extends AppCompatActivity {
 
                         }
                     });
-                    if(n1<3)
+                    if(n1<=3)
                     {
                         try {
 
@@ -284,7 +284,7 @@ public class crowd extends AppCompatActivity {
 
 
 
-                   else if(n1>3&&n1<10) {
+                   else if(n1>3&&n1<=10) {
                         try {
 
                             // Just to display the progress slowly
@@ -294,7 +294,7 @@ public class crowd extends AppCompatActivity {
                         }
                     }
 
-                    else if (n1>10 && n1<20)
+                    else if (n1>10 && n1<=20)
                     {
                         try {
 
@@ -335,7 +335,7 @@ public class crowd extends AppCompatActivity {
 
                         }
                     });
-                    if(n2<3)
+                    if(n2<=3)
                     {
                         try {
 
@@ -348,7 +348,7 @@ public class crowd extends AppCompatActivity {
 
 
 
-                    else if(n2>3&&n2<10) {
+                    else if(n2>3&&n2<=10) {
                         try {
 
                             // Just to display the progress slowly
@@ -358,7 +358,7 @@ public class crowd extends AppCompatActivity {
                         }
                     }
 
-                    else if (n2>10 && n2<20)
+                    else if (n2>10 && n2<=20)
                     {
                         try {
 
@@ -401,7 +401,7 @@ public class crowd extends AppCompatActivity {
 
                         }
                     });
-                    if(n3<3)
+                    if(n3<=3)
                     {
                         try {
 
@@ -414,7 +414,7 @@ public class crowd extends AppCompatActivity {
 
 
 
-                    else if(n3>3&&n3<10) {
+                    else if(n3>3&&n3<=10) {
                         try {
 
                             // Just to display the progress slowly
@@ -424,7 +424,7 @@ public class crowd extends AppCompatActivity {
                         }
                     }
 
-                    else if (n3>10 && n3<20)
+                    else if (n3>10 && n3<=20)
                     {
                         try {
 
@@ -466,7 +466,7 @@ public class crowd extends AppCompatActivity {
                             thappy.setText(shappy + "%");
                         }
                     });
-                    if(happy<3)
+                    if(happy<=3)
                     {
                         try {
 
@@ -479,7 +479,7 @@ public class crowd extends AppCompatActivity {
 
 
 
-                    else if(happy>3&&happy<10) {
+                    else if(happy>3&&happy<=10) {
                         try {
 
                             // Just to display the progress slowly
@@ -489,7 +489,7 @@ public class crowd extends AppCompatActivity {
                         }
                     }
 
-                    else if (happy>10 && happy<20)
+                    else if (happy>10 && happy<=20)
                     {
                         try {
 
@@ -531,7 +531,7 @@ public class crowd extends AppCompatActivity {
                             tsad.setText(ssad + "%");
                         }
                     });
-                    if(n1<3)
+                    if(sad<=3)
                     {
                         try {
 
@@ -544,7 +544,7 @@ public class crowd extends AppCompatActivity {
 
 
 
-                    else if(sad>3&&sad<10) {
+                    else if(sad>3&&sad<=10) {
                         try {
 
                             // Just to display the progress slowly
@@ -554,7 +554,7 @@ public class crowd extends AppCompatActivity {
                         }
                     }
 
-                    else if (sad>10 && sad<20)
+                    else if (sad>10 && sad<=20)
                     {
                         try {
 
@@ -597,7 +597,7 @@ public class crowd extends AppCompatActivity {
                             tangry.setText(sangry + "%");
                         }
                     });
-                    if(anger<3)
+                    if(anger<=3)
                     {
                         try {
 
@@ -610,7 +610,7 @@ public class crowd extends AppCompatActivity {
 
 
 
-                    else if(anger>3&&anger<10) {
+                    else if(anger>3&&anger<=10) {
                         try {
 
                             // Just to display the progress slowly
@@ -620,7 +620,7 @@ public class crowd extends AppCompatActivity {
                         }
                     }
 
-                    else if (anger>10 && anger<20)
+                    else if (anger>10 && anger<=20)
                     {
                         try {
 
@@ -662,7 +662,7 @@ public class crowd extends AppCompatActivity {
                             tfear.setText(sfear + "%");
                         }
                     });
-                    if(fear<3)
+                    if(fear<=3)
                     {
                         try {
 
@@ -675,7 +675,7 @@ public class crowd extends AppCompatActivity {
 
 
 
-                    else if(fear>3&&fear<10) {
+                    else if(fear>3&&fear<=10) {
                         try {
 
                             // Just to display the progress slowly
@@ -685,7 +685,7 @@ public class crowd extends AppCompatActivity {
                         }
                     }
 
-                    else if (fear>10 && fear<20)
+                    else if (fear>10 && fear<=20)
                     {
                         try {
 
@@ -727,7 +727,7 @@ public class crowd extends AppCompatActivity {
                             tneutral.setText(sneutral + "%");
                         }
                     });
-                    if(neutral<3)
+                    if(neutral<=3)
                     {
                         try {
 
@@ -740,7 +740,7 @@ public class crowd extends AppCompatActivity {
 
 
 
-                    else if(neutral>3&&neutral<10) {
+                    else if(neutral>3&&neutral<=10) {
                         try {
 
                             // Just to display the progress slowly
@@ -750,7 +750,7 @@ public class crowd extends AppCompatActivity {
                         }
                     }
 
-                    else if (neutral>10 && neutral<20)
+                    else if (neutral>10 && neutral<=20)
                     {
                         try {
 
