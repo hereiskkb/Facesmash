@@ -394,9 +394,9 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
                     for (Face face : faces) {
                         Age1 = String.format("%s", face.faceAttributes.age);
                         age = Float.valueOf(Age1);
-                        if (age >= 10 && age <= 20)
+                        if (age >= 0 && age <= 19)
                             n1++;
-                        else if (age > 20 && age <= 40)
+                        else if (age >= 20 && age <= 40)
                             n2++;
                         else if (age > 40)
                             n3++;
@@ -585,6 +585,7 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
                 }
             }, 700);
         }
+
     }
 
     public void NoFacesDetected() {

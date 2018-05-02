@@ -116,7 +116,7 @@
             android:text="0%"
             android:textColor="#ffff"
             android:fontFamily="@font/montserrat_bold"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
 
         <ProgressBar
@@ -139,11 +139,11 @@
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="65dp"
+            android:layout_marginRight="63dp"
             android:text="0%"
             android:textColor="#ffff"
             android:fontFamily="@font/montserrat_bold"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </RelativeLayout>
 
@@ -159,7 +159,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:fontFamily="@font/montserrat_bold"
-            android:text="AGE : 10-20 "
+            android:text="AGE : 0-19 "
             android:textColor="#ffffff"
             android:textSize="16sp" />
 
@@ -169,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/montserrat_bold"
-            android:text="AGE : 21-40 "
+            android:text="AGE : 20-40 "
             android:textColor="#ffffff"
             android:textSize="16sp" />
 
@@ -218,7 +218,7 @@
                 android:text="0%"
                 android:textColor="#ffff"
                 android:fontFamily="@font/montserrat_bold"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
         </RelativeLayout>
 
         <ProgressBar
@@ -249,7 +249,7 @@
                 android:text="0%"
                 android:textColor="#ffff"
                 android:fontFamily="@font/montserrat_bold"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
         </RelativeLayout>
 
 
@@ -278,11 +278,11 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-               android:layout_marginRight="20dp"
+               android:layout_marginRight="17dp"
                 android:text="0%"
                 android:textColor="#ffff"
                 android:fontFamily="@font/montserrat_bold"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
         </RelativeLayout>
 
     </RelativeLayout>
