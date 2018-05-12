@@ -23,7 +23,7 @@ public class musicpalyer extends AppCompatActivity {
     MediaPlayer mp;
     int totalTime;
 
-    int k;
+    String k;
 
     public void stop()
     {
@@ -44,38 +44,43 @@ public class musicpalyer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //on receiving the value of k from home activity plays music accordingly
         setContentView(R.layout.activity_musicpalyer);
-        k=getIntent().getExtras().getInt("key");
+        k=getIntent().getExtras().getString("key");
         playbtn = (Button)findViewById(R.id.playbtn);
         elapsedTimeLabel=(TextView)findViewById(R.id.elapsedTimeLabel);
         remainingTimeLabel=(TextView)findViewById(R.id.remainingTimeLabel);
 
         //happy
-        if(k==1)
+        if(k.equals("HAPPY"))
         {
+            Toast.makeText(musicpalyer.this,"Playlist Selected Happy",Toast.LENGTH_SHORT).show();
             mp = MediaPlayer.create(this, R.raw.a);
             mp.start();
         }
 
         //sad
-        else if(k==2) {
+        else if(k.equals("SAD")) {
+            Toast.makeText(musicpalyer.this,"Playlist Selected Sad",Toast.LENGTH_SHORT).show();
             mp = MediaPlayer.create(this, R.raw.b);
             mp.start();        }
         //angry
-        else if(k==3) {
+        else if(k.equals("ANGRY")) {
             mp = MediaPlayer.create(this, R.raw.c);
             mp.start();
+            Toast.makeText(musicpalyer.this,"Playlist Selected Angry",Toast.LENGTH_SHORT).show();
         }
 
         //fear
-        else if(k==4) {
+        else if(k.equals("FEAR")) {
             mp = MediaPlayer.create(this, R.raw.d);
             mp.start();
+            Toast.makeText(musicpalyer.this,"Playlist Selected Fear",Toast.LENGTH_SHORT).show();
         }
 
         //neutral
-        else if(k==5) {
+        else if(k.equals("NEUTRAL")) {
             mp = MediaPlayer.create(this, R.raw.e);
             mp.start();
+            Toast.makeText(musicpalyer.this,"Playlist Selected Neutral",Toast.LENGTH_SHORT).show();
         }
 
 //to manage seek bar according music time duration

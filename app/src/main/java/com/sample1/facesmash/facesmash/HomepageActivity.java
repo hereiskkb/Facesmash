@@ -1,14 +1,18 @@
 package com.sample1.facesmash.facesmash;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.IntentService;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -21,6 +25,7 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,9 +33,12 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Layout;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.ImageView;
@@ -44,16 +52,21 @@ import com.microsoft.projectoxford.face.FaceServiceClient;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
 import com.microsoft.projectoxford.face.contract.Emotion;
 import com.microsoft.projectoxford.face.contract.Face;
+import com.microsoft.projectoxford.face.contract.IdentifyResult;
+import com.microsoft.projectoxford.face.contract.Person;
+import com.microsoft.projectoxford.face.contract.TrainingStatus;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import static android.app.Activity.RESULT_OK;
 import static java.lang.System.exit;
@@ -63,10 +76,23 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
 
     private boolean bb;
     ImageView image;
-
-
+    String personName;
+    String personid;
+    String Karuna = "c7c8cbab-dfdd-4523-9a4b-910c43249b89";
+    String Ransom = "6834f367-65fc-4a23-b89c-f44209fde66b";
+    String Dr3man = "ddd9ce92-d96d-4dfb-885d-3f282c6485a5";
+    String salman = "63f84502-57ae-4318-af34-449899de86aa";
+    String mPersonGroupId = "37df2c47-6f24-452d-846e-2af82bc5e191";
+    Dialog myDialog;
+    String HAPPY = "HAPPY";
+    String SAD = "SAD";
+    String ANGRY = "ANGRY";
+    String FEAR = "FEAR";
+    String NEUTRAL = "NEUTRAL";
+    Boolean serverstate = false;
     private static final int REQUEST_TAKE_PHOTO = 1888;
     private static final int REQUEST_SELECT_IMAGE = 1;
+    private static final int REQUEST_MUSIC_SETTINGS = 2;
 
     // The URI of photo taken with camera
     private Uri mUriPhotoTaken;
@@ -75,7 +101,7 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
     private Uri mImageUri;
 
     private Bitmap mBitmap;
-    int k;
+    String k;
     float l = 0;
     int option = 1;
     float anger, happy, sad, fear, neutral;
@@ -90,16 +116,16 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
 
 
     int detectionResult1;
-    String Age1 ;
-    String Gender1 ;
-    float male , female;
-    float  n1 , n2 , n3 ;
+    String Age1;
+    String Gender1;
+    float male, female;
+    float n1, n2, n3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
-
+        myDialog = new Dialog(this);
         resultbutton = (Button) findViewById(R.id.button2);
         resultbutton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -133,7 +159,7 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
             title = "Crowd Management";
             image.setImageResource(R.drawable.cmark);
         } else if (option == 3) {
-             resultbutton.setVisibility(View.GONE);
+            resultbutton.setVisibility(View.GONE);
             title = "Security";
             image.setImageResource(R.drawable.smark);
         }
@@ -161,8 +187,8 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
                         startActivity(i);
                         break;
                     case R.id.settings:
-                        Intent sett = new Intent(HomepageActivity.this, under_construction.class);
-                        startActivity(sett);
+                        Intent sett = new Intent(HomepageActivity.this, Settings.class);
+                        startActivityForResult(sett,REQUEST_MUSIC_SETTINGS);
                         break;
 
                     case R.id.about:
@@ -175,6 +201,33 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
         });
         setUpToolbar();
 
+
+        // Values Changed in Settings
+
+        SharedPreferences settings = getSharedPreferences("set", Context.MODE_PRIVATE);
+
+        String DHAPPY = settings.getString("HAPPY", "");
+        String DSAD = settings.getString("SAD", "");
+        String DANGRY = settings.getString("ANGRY", "");
+        String DFEAR = settings.getString("FEAR", "");
+        String DNEUTRAL = settings.getString("NEUTRAL", "");
+        serverstate = settings.getBoolean("serverstate",false);
+
+        if (!DHAPPY.equals("")) {
+            HAPPY=DHAPPY;
+        }
+        if (!DSAD.equals("")) {
+          SAD=DSAD;
+        }
+        if (!DANGRY.equals("")) {
+          ANGRY=DANGRY;
+        }
+        if (!DFEAR.equals("")) {
+            FEAR=DFEAR;
+        }
+        if (!DNEUTRAL.equals("")) {
+           NEUTRAL=DNEUTRAL;
+        }
 
     }
 
@@ -271,6 +324,120 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
 
     }
 
+    //identification starts
+    private class IdentificationTask extends AsyncTask<UUID, String, IdentifyResult[]> {
+        private boolean mSucceed = true;
+        String mPersonGroupId;
+
+        IdentificationTask(String personGroupId) {
+            this.mPersonGroupId = personGroupId;
+        }
+
+        @Override
+        protected IdentifyResult[] doInBackground(UUID... params) {
+
+
+            // Get an instance of face service client to detect faces in image.
+            FaceServiceClient faceServiceClient = new FaceServiceRestClient(getString(R.string.endpoint), getString(R.string.subscription_key));
+            try {
+                publishProgress("Getting person group status...");
+
+                TrainingStatus trainingStatus = faceServiceClient.getLargePersonGroupTrainingStatus(
+                        this.mPersonGroupId);     /* personGroupId */
+                if (trainingStatus.status != TrainingStatus.Status.Succeeded) {
+                    publishProgress("Person group training status is " + trainingStatus.status);
+                    mSucceed = false;
+                    return null;
+                }
+
+                publishProgress("Identifying...");
+
+                // Start identification.
+                return faceServiceClient.identityInLargePersonGroup(
+                        this.mPersonGroupId,   /* personGroupId */
+                        params,                  /* faceIds */
+                        1);  /* maxNumOfCandidatesReturned */
+            } catch (Exception e) {
+                mSucceed = false;
+                publishProgress(e.getMessage());
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPreExecute() {
+            mProgressDialog.setTitle("Identifying");
+            mProgressDialog.setMessage("Please Wait");
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.show();
+        }
+
+
+        @Override
+        protected void onPostExecute(IdentifyResult[] result) {
+            // Show the result on screen when detection is done.
+            setUiAfterIdentification1(result, mSucceed);
+        }
+    }
+    //identification ends
+    //identification background task
+
+    // Show the result on screen when detection is done.
+    private void setUiAfterIdentification1(IdentifyResult[] result, boolean succeed) {
+        mProgressDialog.dismiss();
+
+
+        if (succeed) {
+            // Set the information about the detection result.
+            if (result != null) {
+
+
+                for (IdentifyResult identifyResult : result) {
+                    personid = (identifyResult.candidates.size() > 0
+                            ? identifyResult.candidates.get(0).personId.toString()
+                            : "Unknown Person");
+                    if (personid.equals(Karuna)) {
+                        personName = "Karuna";
+                        Intent intent = new Intent(HomepageActivity.this, Security.class);
+                        intent.putExtra("personName", personName);
+                        startActivity(intent);
+                        // Toast.makeText(HomepageActivity.this, "Karuna", Toast.LENGTH_LONG).show();
+                    } else if (personid.equals(salman)) {
+                        personName = "Salman";
+                        Intent intent = new Intent(HomepageActivity.this, Security.class);
+                        intent.putExtra("personName", personName);
+                        startActivity(intent);
+                        //Toast.makeText(HomepageActivity.this, "Salman", Toast.LENGTH_LONG).show();
+                    } else if (personid.equals(Ransom)) {
+                        personName = "Ransom";
+                        Intent intent = new Intent(HomepageActivity.this, Security.class);
+                        intent.putExtra("personName", personName);
+                        startActivity(intent);
+                        //Toast.makeText(HomepageActivity.this, "Ransom", Toast.LENGTH_LONG).show();
+                    } else if (personid.equals(Dr3man)) {
+                        personName = "Drithiman";
+                        Intent intent = new Intent(HomepageActivity.this, Security.class);
+                        intent.putExtra("personName", personName);
+                        startActivity(intent);
+                        // Toast.makeText(HomepageActivity.this, "Drithiman", Toast.LENGTH_LONG).show();
+                    } else if (personid.equals("Unknown Person"))
+                        Toast.makeText(HomepageActivity.this, "Match Not Found", Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(HomepageActivity.this, "Identification Failed", Toast.LENGTH_LONG).show();
+
+
+                }
+
+
+            }
+
+
+        }
+
+
+    }
+
+    //identification background task ends
     @Override
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -326,6 +493,39 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
                 }
                 break;
 
+            case REQUEST_MUSIC_SETTINGS:
+                if(resultCode==RESULT_OK)
+                {
+                    // Values Changed in Settings
+
+                    SharedPreferences settings = getSharedPreferences("set", Context.MODE_PRIVATE);
+
+                    String DHAPPY = settings.getString("HAPPY", "");
+                    String DSAD = settings.getString("SAD", "");
+                    String DANGRY = settings.getString("ANGRY", "");
+                    String DFEAR = settings.getString("FEAR", "");
+                    String DNEUTRAL = settings.getString("NEUTRAL", "");
+                    serverstate = settings.getBoolean("serverstate",false);
+
+                    if (!DHAPPY.equals("")) {
+                        HAPPY=DHAPPY;
+                    }
+                    if (!DSAD.equals("")) {
+                        SAD=DSAD;
+                    }
+                    if (!DANGRY.equals("")) {
+                        ANGRY=DANGRY;
+                    }
+                    if (!DFEAR.equals("")) {
+                        FEAR=DFEAR;
+                    }
+                    if (!DNEUTRAL.equals("")) {
+                        NEUTRAL=DNEUTRAL;
+                    }
+
+                }
+
+
             default:
                 break;
         }
@@ -364,10 +564,13 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
 
 
     private void setUiAfterDetection(Face[] result, boolean succeed) {
-         Age1 = "";
+        Age1 = "";
         Gender1 = "";
-        male = 0; female = 0;
-        n1 = 0; n2 = 0; n3 = 0;
+        male = 0;
+        female = 0;
+        n1 = 0;
+        n2 = 0;
+        n3 = 0;
 
 
         mProgressDialog.dismiss();
@@ -383,8 +586,7 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
                 if (faces.isEmpty()) {
                     resultbutton.setVisibility(View.GONE);
                     NoFacesDetected();
-                }
-                else {
+                } else {
                     happy = 0;
                     sad = 0;
                     fear = 0;
@@ -422,7 +624,7 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
                         intent.putExtra("key", k);
 
                         startActivity(intent);
-                        Toast.makeText(HomepageActivity.this, detectionResult, Toast.LENGTH_LONG).show();
+                        Toast.makeText(HomepageActivity.this, detectionResult, Toast.LENGTH_SHORT).show();
                     } else if (option == 2)
 
                     {
@@ -452,7 +654,20 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
                         intent.putExtra("n3", n3);
                         startActivity(intent);
                         resultbutton.setVisibility(View.VISIBLE);
+                    } else if (option == 3) {
+                        List<UUID> faceIds = new ArrayList<>();
+                        for (Face face : faces) {
+                            faceIds.add(face.faceId);
+                        }
+
+
+                        new IdentificationTask(mPersonGroupId).execute(
+                                faceIds.toArray(new UUID[faceIds.size()]));
+
+
                     }
+
+
                 }
 
 
@@ -485,12 +700,12 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
 
         if (maxNum == emotion.anger) {
             emotionType = "Anger";
-            k = 3;
+            k=ANGRY;
 
             ++anger;
         } else if (maxNum == emotion.happiness) {
             emotionType = "Happiness";
-            k = 1;
+            k = HAPPY;
 
             ++happy;
         } else if (maxNum == emotion.contempt) {
@@ -504,17 +719,17 @@ public class HomepageActivity extends AppCompatActivity implements ConnectivityR
 
         } else if (maxNum == emotion.fear) {
             emotionType = "Fear";
-            k = 4;
+            k = FEAR;
             ++fear;
 
 
         } else if (maxNum == emotion.neutral) {
             emotionType = "Neutral";
-            k = 5;
+            k = NEUTRAL;
             ++neutral;
         } else if (maxNum == emotion.sadness) {
             emotionType = "Sadness";
-            k = 2;
+            k = SAD;
             ++sad;
         } else if (maxNum == emotion.surprise) {
             emotionType = "Surprise";

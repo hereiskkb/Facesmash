@@ -87,7 +87,6 @@ public class crowd extends AppCompatActivity {
         else if (max == neutral)
             emo = "NEUTRAL";
 
-
         String message = "GENERAL EMOTION : " + emo;
         TextView emotion = (TextView) findViewById(R.id.generalemotion);
         emotion.setText(message);

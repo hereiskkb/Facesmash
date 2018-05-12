@@ -27,7 +27,10 @@ public class Home extends AppCompatActivity {
     int choice;
     private boolean bb;
 
-
+public void Home()
+    {
+        int a;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

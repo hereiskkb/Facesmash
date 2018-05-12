@@ -237,5 +237,6 @@ public class ImageHelper {
         result.height = (int)sideLength;
         return result;
     }
+
 }
 

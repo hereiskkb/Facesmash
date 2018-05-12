@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.sample1.facesmash.facesmash">
 
     <uses-feature android:name="android.hardware.camera" />
@@ -10,6 +11,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- -<uses-sdk tools:overrideLibrary="com.microsoft.projectoxford.face"/> -->
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -45,10 +47,10 @@
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="portrait"
-            />
-        <activity android:name=".under_construction"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".under_construction" />
+
         <receiver
             android:name=".ConnectivityReceiver"
             android:enabled="true">
@@ -56,6 +58,13 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".Security"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Settings"
+            android:parentActivityName=".HomepageActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

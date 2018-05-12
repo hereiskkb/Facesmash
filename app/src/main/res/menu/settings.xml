@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ohappy"
+        android:title="Happy" />
+
+    <item
+        android:id="@+id/osad"
+        android:title="Sad" />
+
+</menu>

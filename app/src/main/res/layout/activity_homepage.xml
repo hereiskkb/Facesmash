@@ -47,7 +47,7 @@
             android:layout_below="@+id/image1234"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-118dp"
-            android:background="#00bcd4"
+            android:background="@drawable/savebutton"
             android:text="Results" />
 
     </RelativeLayout>
