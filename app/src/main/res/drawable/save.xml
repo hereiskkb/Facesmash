@@ -6,5 +6,5 @@
         android:state_pressed="true" />
     <item android:drawable="@drawable/ic_save"
         android:state_focused="true" />
-    <item android:drawable="@drawable/ic_save_black_24dp" />
+    <item android:drawable="@drawable/savebutton" />
 </selector>

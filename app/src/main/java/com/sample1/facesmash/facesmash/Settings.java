@@ -1,16 +1,11 @@
 package com.sample1.facesmash.facesmash;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Selection;
-import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,11 +13,6 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.microsoft.projectoxford.face.contract.Emotion;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Settings extends AppCompatActivity {
     Toolbar toolbar;

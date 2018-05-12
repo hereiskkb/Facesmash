@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!-- -<uses-sdk tools:overrideLibrary="com.microsoft.projectoxford.face"/> -->
+    <uses-sdk tools:overrideLibrary="com.microsoft.projectoxford.face"/>
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
