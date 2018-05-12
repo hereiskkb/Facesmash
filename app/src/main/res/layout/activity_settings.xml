@@ -252,15 +252,11 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
         android:background="@drawable/save"
         android:text="save"
         android:layout_alignParentBottom="true"
         android:onClick="save"/>
-</RelativeLayout>
-=======
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="40dp">
+	</RelativeLayout>
 
         <Button
             android:layout_width="wrap_content"
@@ -270,6 +266,5 @@
             android:onClick="save"
             android:text="save" />
     </RelativeLayout>
->>>>>>> 43aab70d02b2085809bd480f66d856197ca446ef
 
 </LinearLayout>
