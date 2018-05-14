@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 'android-P'
     defaultConfig {
         applicationId "com.sample1.facesmash.facesmash"
         minSdkVersion 19
@@ -41,7 +40,6 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
     implementation 'com.microsoft.projectoxford:face:1.4.3'
-
     implementation 'com.karumi:dexter:4.2.0'
 
 

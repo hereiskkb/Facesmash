@@ -253,15 +253,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/save"
-        android:text="save"
-        android:layout_alignParentBottom="true"
-        android:onClick="save"/>
-	</RelativeLayout>
+        android:layout_gravity="center"
+        android:onClick="save">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentBottom="false"
             android:background="@drawable/savebutton"
             android:onClick="save"
             android:text="save" />
